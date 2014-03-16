@@ -20,6 +20,14 @@ public class LinkedListStack<T> implements Iterable<T> {
     }
   }
   
+  public LinkedListStack<T> reverse() {
+    LinkedListStack<T> reversed = new LinkedListStack<T>();
+    while (!isEmpty()) {
+      reversed.add(remove());
+    }
+    return reversed;
+  }
+  
   public boolean isEmpty() {
     return (first == null);
   }
@@ -86,5 +94,12 @@ public class LinkedListStack<T> implements Iterable<T> {
     for (String s: stringStack) {
       System.out.println("Element: " + s);
     }
+    
+    LinkedListStack<String> reversedStack = stringStack.reverse();
+    System.out.println("Printing out the reversed stack now:");
+    for (String s: reversedStack) {
+      System.out.println("Element: " + s);
+    }
+    
   }
 }

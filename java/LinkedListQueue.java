@@ -21,6 +21,20 @@ public class LinkedListQueue<T> implements Iterable<T> {
     }
   }
 
+  public LinkedListQueue<T> reverse() {
+    LinkedListStack<T> stack = new LinkedListStack<T>();
+    while (!isEmpty()) {
+      stack.add(remove());
+    }
+    
+    LinkedListQueue<T> reversed = new LinkedListQueue<T>();
+    while (!stack.isEmpty()) {
+      reversed.add(stack.remove());
+    }
+    
+    return reversed;
+  }
+
   public LinkedListQueue() {
     this.first = null;
     this.last = null;
@@ -96,6 +110,12 @@ public class LinkedListQueue<T> implements Iterable<T> {
     
     System.out.println("Printing out the queue now:");
     for (String s: stringQueue) {
+      System.out.println("Element: " + s);
+    }
+    
+    System.out.println("Printing out the reversed queue now:");
+    LinkedListQueue<String> reversedQueue = stringQueue.reverse();
+    for (String s: reversedQueue) {
       System.out.println("Element: " + s);
     }
   }
