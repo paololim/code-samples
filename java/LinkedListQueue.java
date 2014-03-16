@@ -6,7 +6,7 @@
  */
 import java.util.Iterator;
 
-public class LinkedListQueue<T> implements Iterable<T>{
+public class LinkedListQueue<T> implements Iterable<T> {
   private Node first;
   private Node last;
   private int count;
