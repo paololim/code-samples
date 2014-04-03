@@ -7,7 +7,7 @@
 public class Fibonacci {
   public static int recursive(int n) {
     if (n <= 2) {
-      return n;
+      return 1;
     } else {
       return recursive(n-1) + recursive(n-2);
     }
