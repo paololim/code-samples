@@ -21,18 +21,19 @@ public class LinkedListQueue<T> implements Iterable<T> {
     }
   }
 
-  public LinkedListQueue<T> reverse() {
-    LinkedListStack<T> stack = new LinkedListStack<T>();
-    while (!isEmpty()) {
-      stack.add(remove());
-    }
+  public void reverseInPlace() {
+    Node prev = null;
+    Node curr = first;
+    last = curr;
     
-    LinkedListQueue<T> reversed = new LinkedListQueue<T>();
-    while (!stack.isEmpty()) {
-      reversed.add(stack.remove());
+    while (curr != null) {
+      Node next = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next;
     }
-    
-    return reversed;
+
+    first = prev;
   }
 
   public LinkedListQueue() {
@@ -101,22 +102,25 @@ public class LinkedListQueue<T> implements Iterable<T> {
     stringQueue.add("World");
     stringQueue.add("Foo");
     stringQueue.add("Bar");
-    System.out.println("Dequeued: " + stringQueue.remove());
-    System.out.println("Dequeued: " + stringQueue.remove());
+    stringQueue.remove();
+    stringQueue.remove();
     stringQueue.add("See");
     stringQueue.add("You");
     stringQueue.add("Later");
-    System.out.println("Dequeued: " + stringQueue.remove());
+    stringQueue.remove();
     
-    System.out.println("Printing out the queue now:");
+    System.out.println("Current linked list:");
     for (String s: stringQueue) {
       System.out.println("Element: " + s);
     }
     
     System.out.println("Printing out the reversed queue now:");
-    LinkedListQueue<String> reversedQueue = stringQueue.reverse();
-    for (String s: reversedQueue) {
+    stringQueue.reverseInPlace();
+    for (String s: stringQueue) {
       System.out.println("Element: " + s);
     }
+    
+    System.out.println("FIRST: " + stringQueue.first.value);
+    System.out.println("LAST: " + stringQueue.last.value);
   }
 }

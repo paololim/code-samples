@@ -20,12 +20,17 @@ public class LinkedListStack<T> implements Iterable<T> {
     }
   }
   
-  public LinkedListStack<T> reverse() {
-    LinkedListStack<T> reversed = new LinkedListStack<T>();
-    while (!isEmpty()) {
-      reversed.add(remove());
+  public void reverseInPlace() {
+    Node prev = null;
+    Node curr = first;
+    
+    while (curr != null) {
+      Node next = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next;
     }
-    return reversed;
+    first = prev;
   }
   
   public boolean isEmpty() {
@@ -83,23 +88,24 @@ public class LinkedListStack<T> implements Iterable<T> {
     stringStack.add("World");
     stringStack.add("Foo");
     stringStack.add("Bar");
-    System.out.println("Popped: " + stringStack.remove());
-    System.out.println("Popped: " + stringStack.remove());
+    stringStack.remove();
+    stringStack.remove();
     stringStack.add("See");
     stringStack.add("You");
     stringStack.add("Later");
-    System.out.println("Popped: " + stringStack.remove());
+    stringStack.remove();
     
-    System.out.println("Printing out the stack now:");
-    for (String s: stringStack) {
+    System.out.println("Current linked list:");
+    for(String s: stringStack) {
       System.out.println("Element: " + s);
     }
     
-    LinkedListStack<String> reversedStack = stringStack.reverse();
-    System.out.println("Printing out the reversed stack now:");
-    for (String s: reversedStack) {
+    stringStack.reverseInPlace();
+    System.out.println("Printing out the reversed-in-place stack now:");
+    for(String s: stringStack) {
       System.out.println("Element: " + s);
     }
     
+    System.out.println("FIRST: " + stringStack.first.value);
   }
 }
